@@ -15,15 +15,15 @@
 <style>
   :root {
     --bg: #0f0f0f;
-    --surface: #1a1a1a;
-    --surface2: #242424;
-    --border: rgba(255,255,255,0.08);
-    --border2: rgba(255,255,255,0.14);
+    --surface: #1c1c1c;
+    --surface2: #272727;
+    --border: rgba(255,255,255,0.1);
+    --border2: rgba(255,255,255,0.18);
     --text: #f0ede8;
-    --text2: rgba(240,237,232,0.5);
+    --text2: rgba(240,237,232,0.55);
     --accent: #e8d5a3;
     --accent-dark: #c4a96a;
-    --radius: 16px;
+    --radius: 14px;
     --radius-sm: 10px;
   }
 
@@ -44,7 +44,7 @@
     flex-direction: column;
     min-height: 100dvh;
     width: 100%;
-    padding: env(safe-area-inset-top, 16px) 0 env(safe-area-inset-bottom, 16px);
+    padding: env(safe-area-inset-top, 20px) 0 env(safe-area-inset-bottom, 24px);
   }
 
   header {
@@ -75,27 +75,28 @@
 
   .tabs {
     display: flex;
-    margin: 0 24px 20px;
+    margin: 0 20px 24px;
     background: var(--surface);
-    border-radius: var(--radius-sm);
-    padding: 3px;
-    gap: 2px;
+    border-radius: 12px;
+    padding: 4px;
+    gap: 3px;
   }
 
   .tab {
     flex: 1;
-    padding: 9px 4px;
+    padding: 13px 4px;
     font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 700;
     text-align: center;
     cursor: pointer;
     border: none;
     background: transparent;
     color: var(--text2);
-    border-radius: 7px;
+    border-radius: 9px;
     transition: all 0.2s;
-    letter-spacing: 0.3px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 
   .tab.active {
@@ -105,7 +106,7 @@
 
   .content {
     flex: 1;
-    padding: 0 24px;
+    padding: 0 20px;
     overflow-y: auto;
   }
 
@@ -113,26 +114,26 @@
   .section.active { display: block; }
 
   .field-label {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
-    letter-spacing: 1.2px;
+    letter-spacing: 1.4px;
     text-transform: uppercase;
     color: var(--text2);
-    margin-bottom: 8px;
-    margin-top: 18px;
+    margin-bottom: 10px;
+    margin-top: 24px;
   }
 
   .field-label:first-child { margin-top: 0; }
 
   input[type=text] {
     width: 100%;
-    padding: 13px 16px;
+    padding: 16px 18px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     color: var(--text);
     font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 400;
     outline: none;
     transition: border-color 0.15s;
@@ -149,12 +150,13 @@
 
   .btn-primary {
     width: 100%;
-    padding: 15px;
-    margin-top: 20px;
+    padding: 18px;
+    margin-top: 24px;
     font-family: 'Syne', sans-serif;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     border: none;
     border-radius: var(--radius-sm);
     background: var(--accent);
@@ -183,8 +185,8 @@
   .btn-secondary:active { background: var(--surface2); }
 
   .result-card {
-    margin-top: 20px;
-    padding: 28px 20px;
+    margin-top: 24px;
+    padding: 32px 24px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -215,7 +217,7 @@
 
   .result-main {
     font-family: 'Syne', sans-serif;
-    font-size: 26px;
+    font-size: 30px;
     font-weight: 800;
     color: var(--accent);
     letter-spacing: -0.5px;
@@ -383,9 +385,9 @@
   </header>
 
   <div class="tabs">
-    <button class="tab active" onclick="switchTab('coin')">🪙 Flip</button>
-    <button class="tab" onclick="switchTab('pick')">🎲 Pick</button>
-    <button class="tab" onclick="switchTab('vote')">📊 Vote</button>
+    <button class="tab active" onclick="switchTab('coin')">Flip</button>
+    <button class="tab" onclick="switchTab('pick')">Pick</button>
+    <button class="tab" onclick="switchTab('vote')">Vote</button>
   </div>
 
   <div class="content">
