@@ -375,6 +375,81 @@
     0%,100% { transform: scale(1); }
     50% { transform: scale(1.04); }
   }
+
+  .paste-btn {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 4px;
+    border: 1px dashed var(--border2);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text2);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .paste-btn:active { background: var(--surface); }
+
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 100;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .modal-overlay.open {
+    display: flex;
+  }
+
+  .modal {
+    background: #1c1c1c;
+    border-radius: 20px 20px 0 0;
+    padding: 24px 20px 40px;
+    width: 100%;
+    border-top: 1px solid var(--border2);
+  }
+
+  .modal-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .modal-sub {
+    font-size: 13px;
+    color: var(--text2);
+    margin-bottom: 16px;
+  }
+
+  .modal textarea {
+    width: 100%;
+    height: 180px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    padding: 14px;
+    resize: none;
+    outline: none;
+    -webkit-appearance: none;
+    margin-bottom: 12px;
+  }
+
+  .modal textarea::placeholder { color: var(--text2); }
+
+  .modal-btns {
+    display: flex;
+    gap: 10px;
+  }
 </style>
 </head>
 <body>
@@ -438,6 +513,19 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- PASTE MODAL -->
+  <div class="modal-overlay" id="paste-modal">
+    <div class="modal">
+      <div class="modal-title">Paste a list</div>
+      <div class="modal-sub">One item per line — each line becomes an option</div>
+      <textarea id="paste-text" placeholder="Pizza&#10;Tacos&#10;Sushi&#10;Burgers"></textarea>
+      <div class="modal-btns">
+        <button class="btn-secondary" style="flex:1;padding:14px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;border:1px solid var(--border2);border-radius:var(--radius-sm);background:transparent;color:var(--text2);cursor:pointer;" onclick="closePasteModal()">Cancel</button>
+        <button class="btn-primary" style="flex:2;margin-top:0;padding:14px;" onclick="confirmPaste()">Add options</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -590,6 +678,40 @@
   renderPickList();
   voteItems = ['', '', ''];
   renderVoteSetup();
+
+  let pasteTarget = 'pick';
+
+  function openPasteModal(target) {
+    pasteTarget = target;
+    document.getElementById('paste-text').value = '';
+    document.getElementById('paste-modal').classList.add('open');
+    setTimeout(() => document.getElementById('paste-text').focus(), 100);
+  }
+
+  function closePasteModal() {
+    document.getElementById('paste-modal').classList.remove('open');
+  }
+
+  function confirmPaste() {
+    const text = document.getElementById('paste-text').value;
+    const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+    if (lines.length === 0) { closePasteModal(); return; }
+    if (pasteTarget === 'pick') {
+      pickItems = lines;
+      renderPickList();
+      document.getElementById('pick-result').style.display = 'none';
+    } else {
+      voteItems = lines;
+      renderVoteList();
+    }
+    closePasteModal();
+  }
+
+  // Close modal on overlay tap
+  document.getElementById('paste-modal').addEventListener('click', function(e) {
+    if (e.target === this) closePasteModal();
+  });
+
 </script>
 </body>
 </html>
