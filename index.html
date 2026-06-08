@@ -487,6 +487,7 @@
       <div class="field-label">Your options</div>
       <div id="pick-list"></div>
       <button class="add-row" onclick="addPickItem()">+ Add option</button>
+      <button class="paste-btn" onclick="openPasteModal('pick')">Paste a list</button>
       <button class="btn-primary" onclick="pickRandom()">Pick one randomly</button>
       <div class="result-card" id="pick-result">
         <span class="result-emoji">🎯</span>
@@ -501,6 +502,7 @@
         <div class="field-label">Options to vote on</div>
         <div id="vote-setup-list"></div>
         <button class="add-row" onclick="addVoteItem()">+ Add option</button>
+      <button class="paste-btn" onclick="openPasteModal('vote')">Paste a list</button>
         <button class="btn-primary" onclick="startVoting()">Start voting</button>
       </div>
       <div id="vote-active-view" style="display:none">
